@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  surname String
+  phone String @unique
+  email String @unique
+  password String
+  created_at DateTime @default(now())
+}
+
+model Visitor {
+  id Int @id @default(autoincrement())
+  visit Int
+  ip String?
+  createdAt DateTime @default(now())
+}
+
+model Language {
+  id Int @id @default(autoincrement())
+  name String @unique
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String @unique
+}
+
+model Category {
+  id Int @id @default(autoincrement())
+  name String @unique
+  created_at DateTime @default(now())
+  products Product[]
+}
+
+model Description {
+  id Int @id @default(autoincrement())
+  title String?
+  description String?
+  price_in String?
+  yearly_tax_rate String?
+  association_fee String?
+  after_price_label String?
+  before_price_label String?
+  propert_status String?
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String @unique
+}
+
+model Images {
+  id Int @id @default(autoincrement())
+  path String
+  media Media? @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  mediaId Int?
+}
+
+model Media {
+  id Int @id @default(autoincrement())
+  images Images[]
+  video String?
+  virtual_tour String?
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String @unique
+}
+
+model Location {
+  id Int @id @default(autoincrement())
+  address String
+  state String
+  city String
+  neighbour String
+  zip String
+  country String
+  latitude String
+  longitude String
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String @unique
+}
+
+model Detail {
+  id Int @id @default(autoincrement())
+  size_in_ft String?
+  lot_size_in_ft String?
+  rooms String?
+  bedrooms String?
+  bathrooms String?
+  custom_id String?
+  garages String?
+  garage_size String?
+  year_built String?
+  available_from String?
+  basement String?
+  extra_details String?
+  roofing String?
+  exterior_material String?
+  structure_type String?
+  floors_no String?
+  agent_nots String?
+  energy_type String?
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String @unique
+}
+
+model Product {
+  id String @id @default(uuid())
+  language Language?
+  description Description?
+  media Media?
+  location Location?
+  detail Detail?
+  createdAt DateTime @default(now())
+
+  category Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId Int?
+}
