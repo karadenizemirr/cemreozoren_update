@@ -13,7 +13,6 @@
     <div class="container">
         <div class="row">
             {{#each result}}
-            {{#eq this.language.short ...lang}}
             <div class="col-lg-4 col-sm-6 mb-6" data-animate="zoomIn">
                 <div class="card shadow-hover-1">
                     <div class="hover-change-image bg-hover-overlay rounded-lg card-img-top">
@@ -91,7 +90,6 @@
                     </div>
                 </div>
             </div>
-            {{/eq}}
             {{/each}}
         </div>
     </div>

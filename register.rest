@@ -1,10 +1,10 @@
-POST http://localhost:3000/user/register
+POST https://cemreozoren-f4f3e83aae2b.herokuapp.com/user/register
 Content-Type: application/json
 
 {
     "name":"Emirhan",
     "surname":"Karadeniz",
-    "email": "karadenizemirr@gmail.com",
+    "email": "admin@mail.com",
     "phone": "5076510758",
     "password": "123456"
 }
