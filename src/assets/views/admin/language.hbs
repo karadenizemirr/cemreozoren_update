@@ -1,9 +1,9 @@
 <div class="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
     <div class="d-flex flex-wrap flex-md-nowrap mb-6">
         <div class="mr-0 mr-md-auto">
-            <h2 class="mb-0 text-heading fs-22 lh-15">Emlaklar
+            <h2 class="mb-0 text-heading fs-22 lh-15">Dil İşlemleri
             </h2>
-            <p>Tüm emlaklara bu sayfadan ulaşabilirsiniz</p>
+            <p>İçeriklerinizin dil ayarlarını buradan gerçekleştirebilirsiniz.</p>
         </div>
         <div class="form-inline justify-content-md-end mx-n2">
             <div class="p-2">
@@ -21,25 +21,20 @@
         <table class="table text-center">
             <thead>
                 <tr>
-                    <th scope="col">Kategori Adı</th>
-                    <th scope="col">Kategori Dili</th>
+                    <th scope="col">Dil Adı</th>
+                    <th scope="col">Kısaltma</th>
                     <th scope="col">Eklenme Tarihi</th>
                     <th scope="col">İşlemler</th>
                 </tr>
             </thead>
             <tbody>
-                <form action="/dashboard/category" method="post">
+                <form action="/dashboard/language" method="post">
                     <tr>
                         <td>
-                            <input type="text" class="form-control" placeholder="Kategori Adı" name="name"
-                                autocomplete="off">
+                            <input type="text" class="form-control" placeholder="Dil" name="name" autocomplete="off">
                         </td>
                         <td>
-                            <select name="language" id="" class="form-control">
-                                {{#each language}}
-                                <option value="{{this.id}}">{{this.name}}</option>
-                                {{/each}}
-                            </select>
+                            <input type="text" class="form-control" placeholder="Ör: tr" name="short">
                         </td>
                         <td>
                             <input type="date" class="form-control" placeholder="Eklenme Tarihi" disabled>
@@ -58,18 +53,14 @@
                     </tr>
                 </form>
 
-                {{#each categories}}
-                <form action="/dashboard/category/update/{{this.id}}" method="post">
+                {{#each language}}
+                <form action="/dashboard/language/update/{{this.id}}" method="post">
                     <tr>
                         <td>
                             <input type="text" class="form-control" value="{{this.name}}" name="name">
                         </td>
-                        <td>
-                            <select name="" id="" class="form-control">
-                                {{#each ...language}}
-                                <option value="{{this.id}}" {{selected this.id ...this.language.id}}>{{this.name}}</option>
-                                {{/each}}
-                            </select>
+                         <td>
+                            <input type="text" class="form-control" placeholder="Ör: tr" name="short" value="{{this.short}}">
                         </td>
                         <td>
                             <input type="date" class="form-control" value="{{this.created_at}}" disabled>

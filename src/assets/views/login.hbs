@@ -10,6 +10,7 @@
                     </div>
                     <div class="card-body">
                         <form action="/user/login" method="post">
+                        {{csrfField}}
                             <div class="row mb-4">
                                 <div class="col">
                                     <input type="text" class="form-control" placeholder="Kullanıcı Adı" required name="email" autocomplete="off">

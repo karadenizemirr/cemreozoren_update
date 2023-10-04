@@ -75,6 +75,11 @@ export class ProductService {
                             connect: {
                                 id: Number(data.category)
                             }
+                        },
+                        language: {
+                            connect: {
+                                id: Number(data.language)
+                            }
                         }
                     }
                 }
@@ -98,7 +103,8 @@ export class ProductService {
                         },
                         location: true,
                         detail: true,
-                        description: true
+                        description: true,
+                        language: true
                     }
                 }
             )
@@ -125,7 +131,8 @@ export class ProductService {
                         },
                         location: true,
                         detail:true,
-                        category: true
+                        category: true,
+                        language: true
                     }
                 }
             )
@@ -231,6 +238,11 @@ export class ProductService {
                                 id: Number(data.category)
                             }
                         },
+                        language: {
+                            connect: {
+                                id: Number(data.language)
+                            }
+                        }
                     }
                 }
             )
@@ -265,6 +277,48 @@ export class ProductService {
             }
         }catch(err){
             throw new HttpException('Image remove error', HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async product_search(category:string, location:string, keyword:string){
+        try{
+            const result = await this.prisma.product.findMany(
+                {
+                    where: {
+                        OR: [
+                            {category: {
+                                name: {
+                                    contains: category
+                                }
+                            }},
+                            {
+                                location: {
+                                    address: {
+                                        contains: location
+                                    }
+                                }
+                            },
+                            {
+                                description: {
+                                    title: {
+                                        contains: keyword
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    include: {
+                        description: true,
+                        media: true,
+                        location: true,
+                        detail: true,
+                        category: true
+                    }
+                }
+            )
+            return result
+        }catch(err){
+            throw new HttpException('Product search error', HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
 }

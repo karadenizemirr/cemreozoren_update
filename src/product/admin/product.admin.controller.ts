@@ -1,13 +1,16 @@
 import { FilesInterceptor, UploadedFiles, MemoryStorageFile } from '@blazity/nest-file-fastify';
-import { Body, Controller, Get, Param, Post, Render, Res, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Render, Res, UseGuards, UseInterceptors } from "@nestjs/common";
 import { CategoryService } from "src/category/category.service";
 import { ProductService } from '../product.service';
 import { Response } from 'express';
-import { Prisma } from '@prisma/client';
+import { Language, Prisma } from '@prisma/client';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { LanguageService } from 'src/language/language.service';
 
 @Controller('product')
+@UseGuards(AuthGuard)
 export class ProductAdminController {
-    constructor(private categoryService: CategoryService, private productService: ProductService) {}
+    constructor(private categoryService: CategoryService, private productService: ProductService, private languageService:LanguageService) {}
 
     @Get()
     @Render('admin/product/product')
@@ -24,10 +27,12 @@ export class ProductAdminController {
     @Render('admin/product/add-product')
     async get_add_product(){
         const categories = await this.categoryService.get_all_category();
+        const languages = await this.languageService.get_all_language();
 
         return {
             title: 'Emlak Ekle',
-            categories: categories
+            categories: categories,
+            languages: languages
         }
     }
     @Post('add')
@@ -52,10 +57,12 @@ export class ProductAdminController {
     async get_update(@Param('id') id:string){
         const product = await this.productService.get_product(id)
         const categories = await this.categoryService.get_all_category()
+        const languages = await this.languageService.get_all_language()
         return {
             title: 'Emlak Güncelle',
             product: product[0],
-            categories: categories
+            categories: categories,
+            languages: languages
         }
     }
 

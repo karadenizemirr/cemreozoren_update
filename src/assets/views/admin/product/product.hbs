@@ -12,7 +12,7 @@
                         <button class="btn pr-0 shadow-none" type="button"><i class="far fa-search"></i></button>
                     </div>
                     <input type="text" class="form-control bg-transparent border-0 shadow-none text-body"
-                        placeholder="Search listing" name="search">
+                        placeholder="Emlaklarda arayın.." name="search" id="productSearchInput" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="align-middle">{{this.createdAt}}</td>
+                    <td class="align-middle">{{datetime this.createdAt}}</td>
                     <td class="align-middle">
                         <span
                             class="badge text-capitalize font-weight-normal fs-12 badge-yellow">{{this.category.name}}</span>
@@ -74,3 +74,17 @@
         </table>
     </div>
 </div>
+<script>
+  $(document).ready(function() {
+    $('#productSearchInput').on('keyup', function() {
+      var value = $(this).val().toLowerCase();
+      $('table tbody tr').filter(function() {
+        var rowText = $(this).find('div, span, a').map(function() {
+          return $(this).text().toLowerCase();
+        }).get().join(' ');
+
+        $(this).toggle(rowText.indexOf(value) > -1);
+      });
+    });
+  });
+</script>

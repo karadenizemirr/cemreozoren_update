@@ -1,0 +1,308 @@
+<section class="bg-white shadow-5 pb-1">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb py-3">
+                <li class="breadcrumb-item fs-12 letter-spacing-087">
+                    <a href="/">Anasayfa</a>
+                </li>
+                <li class="breadcrumb-item fs-12 letter-spacing-087">
+                    <a href="/">Detay</a>
+                </li>
+                <li class="breadcrumb-item fs-12 letter-spacing-087 active">{{product.description.title}}</li>
+            </ol>
+        </nav>
+        <div class="galleries position-relative" data-animate="zoomIn">
+            <div class="position-absolute pos-fixed-top-right z-index-3">
+                <ul class="list-inline pt-4 pr-5">
+                    <li class="list-inline-item mr-2">
+                        <a href="#" data-toggle="tooltip" title=""
+                            class="d-flex align-items-center justify-content-center w-40px h-40 bg-white text-heading bg-hover-primary hover-white rounded-circle"
+                            data-original-title="Favourite">
+                            <i class="far fa-heart"></i></a>
+                    </li>
+                    <li class="list-inline-item mr-2">
+                        <button type="button"
+                            class="btn btn-white p-0 d-flex align-items-center justify-content-center w-40px h-40 text-heading bg-hover-primary hover-white rounded-circle border-0 shadow-none"
+                            data-container="body" data-toggle="popover" data-placement="top" data-html="true"
+                            data-content=' <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                      <a href="#" class="text-muted fs-15 hover-dark lh-1 px-2"><i
+                                                class="fab fa-twitter"></i></a>
+                    </li>
+                    <li class="list-inline-item ">
+                      <a href="#" class="text-muted fs-15 hover-dark lh-1 px-2"><i
+                                                class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="#" class="text-muted fs-15 hover-dark lh-1 px-2"><i
+                                                class="fab fa-instagram"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="#" class="text-muted fs-15 hover-dark lh-1 px-2"><i
+                                                class="fab fa-youtube"></i></a>
+                    </li>
+                  </ul>
+                  '>
+                            <i class="far fa-share-alt"></i>
+                        </button>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" data-toggle="tooltip" title=""
+                            class="d-flex align-items-center justify-content-center w-40px h-40 bg-white text-heading bg-hover-primary hover-white rounded-circle"
+                            data-original-title="Print">
+                            <i class="far fa-print"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="slick-slider slider-for"
+                data-slick-options='{"slidesToShow": 1, "autoplay":false,"dots":false,"arrows":false,"asNavFor": ".slider-nav"}'>
+                {{#each product.media.images}}
+                <div class="box">
+                    <div class="item item-size-3-2">
+                        <div class="card p-0 hover-change-image">
+                            <a href="/public/uploads/{{path}}" class="card-img" data-gtf-mfp="true" data-gallery-id="02"
+                                style="background-image:url('/public/uploads/{{path}}')">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <div class="slick-slider slider-nav mt-1 mx-n1 arrow-haft-inner"
+                data-slick-options='{"slidesToShow": 6, "autoplay":false,"dots":false,"arrows":true,"asNavFor": ".slider-for","focusOnSelect": true,"responsive":[{"breakpoint": 1200,"settings": {"slidesToShow": 4,"arrows":false}},{"breakpoint": 768,"settings": {"slidesToShow": 4,"arrows":false}},{"breakpoint": 576,"settings": {"slidesToShow": 2,"arrows":false}}]}'>
+                {{#each product.media.images}}
+                <div class="box pb-6 px-0">
+                    <div class="bg-white p-1 shadow-hover-xs-3 h-100 rounded-lg">
+                        <img src="/public/uploads/{{path}}" alt="Gallery 01" class="h-100 w-100 rounded-lg">
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</section>
+<div class="primary-content bg-gray-01 pt-7 pb-12">
+    <div class="container">
+        <div class="row">
+            <article class="col-lg-12">
+                <section class="pb-8 px-6 pt-6 bg-white rounded-lg">
+                    <ul class="list-inline d-sm-flex align-items-sm-center mb-2">
+                        <li class="list-inline-item badge badge-primary mr-3">
+                            {{#eq product.description.propert_status 'sale'}}
+                            {{_.core.sale}}
+                            {{else}}
+                            {{_.core.rent}}
+                            {{/eq}}
+                        </li>
+                    </ul>
+                    <div class="d-sm-flex justify-content-sm-between">
+                        <div>
+                            <h2 class="fs-35 font-weight-600 lh-15 text-heading">{{product.description.title}}</h2>
+                            <p class="mb-0"><i class="fal fa-map-marker-alt mr-2"></i>{{product.location.address}}</p>
+                        </div>
+                        <div class="mt-2 text-lg-right">
+                            <p class="fs-22 text-heading font-weight-bold mb-0">
+                                {{product.description.before_price_label}}&nbsp;{{product.description.price_in}}&nbsp;{{product.description.after_price_label}}
+                            </p>
+                            <p class="mb-0">$9350/SqFt</p>
+                        </div>
+                    </div>
+                    <h4 class="fs-22 text-heading mt-6 mb-2">{{_.core.description}}</h4>
+                    <p class="mb-0 lh-214">
+                        {{product.description.description}}
+                    </p>
+                </section>
+                <section class="mt-2 pb-3 px-6 pt-5 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-6">{{_.core.features}}</h4>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-4 mb-6">
+                            <div class="media">
+                                <div class="p-2 shadow-xxs-1 rounded-lg mr-2">
+                                    <svg class="icon icon-year fs-32 text-primary">
+                                        <use xlink:href="#icon-year"></use>
+                                    </svg>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="my-1 fs-14 text-uppercase letter-spacing-093 font-weight-normal">
+                                        {{_.core.year_built}}</h5>
+                                    <p class="mb-0 fs-13 font-weight-bold text-heading">{{product.detail.year_built}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4 mb-6">
+                            <div class="media">
+                                <div class="p-2 shadow-xxs-1 rounded-lg mr-2">
+                                    <svg class="icon icon-bedroom fs-32 text-primary">
+                                        <use xlink:href="#icon-bedroom"></use>
+                                    </svg>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="my-1 fs-14 text-uppercase letter-spacing-093 font-weight-normal">
+                                        {{_.core.bedrooms}}
+                                    </h5>
+                                    <p class="mb-0 fs-13 font-weight-bold text-heading">{{product.detail.bedrooms}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4 mb-6">
+                            <div class="media">
+                                <div class="p-2 shadow-xxs-1 rounded-lg mr-2">
+                                    <svg class="icon icon-sofa fs-32 text-primary">
+                                        <use xlink:href="#icon-sofa"></use>
+                                    </svg>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="my-1 fs-14 text-uppercase letter-spacing-093 font-weight-normal">
+                                        {{_.core.bathrooms}}</h5>
+                                    <p class="mb-0 fs-13 font-weight-bold text-heading">{{product.detail.bathrooms}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4 mb-6">
+                            <div class="media">
+                                <div class="p-2 shadow-xxs-1 rounded-lg mr-2">
+                                    <svg class="icon icon-Garage fs-32 text-primary">
+                                        <use xlink:href="#icon-Garage"></use>
+                                    </svg>
+                                </div>
+                                <div class="media-body">
+                                    <h5 class="my-1 fs-14 text-uppercase letter-spacing-093 font-weight-normal">
+                                        {{_.core.garage}}
+                                    </h5>
+                                    <p class="mb-0 fs-13 font-weight-bold text-heading">{{product.detail.garages}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="mt-2 pb-6 px-6 pt-5 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-4">{{_.core.addinational_details}}</h4>
+                    <div class="row">
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.property_id}}</dt>
+                            <dd>{{product.id}}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.price}}</dt>
+                            <dd>{{product.description.before_price_label}}&nbsp;{{product.description.price_in}}&nbsp;{{product.description.after_price_label}}
+                            </dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.category}}</dt>
+                            <dd>{{product.category.name}}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.status}}</dt>
+                            <dd>{{product.description.propert_status}}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.rooms}}</dt>
+                            <dd>{{product.detail.rooms}}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.bedrooms}}</dt>
+                            <dd>{{product.detail.bedrooms}}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.size}}</dt>
+                            <dd>{{product.detail.size_in_ft}}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.bathrooms}}</dt>
+                            <dd>{{product.detail.bathrooms}}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.garage}}</dt>
+                            <dd>{{product.detail.garages}}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.bathrooms}}</dt>
+                            <dd>{{product.detail.bathrooms}}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.garage_size}}</dt>
+                            <dd>{{product.detail.garage_size}}</dd>
+                        </dl>
+                        <dl class="col-sm-6 mb-0 d-flex">
+                            <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.year_built}}</dt>
+                            <dd>{{product.detail.year_built}}</dd>
+                        </dl>
+                    </div>
+                </section>
+                <section class="mt-2 pb-6 px-6 pt-6 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-6">{{_.core.virtual_tour}}</h4>
+                    {{#if product.detail.virtual_tour}}
+                    <iframe height="430" src="{{product.media.virtual_tour}}" allowfullscreen="" class="w-100"></iframe>
+                    {{/if}}
+                </section>
+                <section class="mt-2 pb-6 px-6 pt-6 bg-white rounded-lg">
+                    <h4 class="fs-22 text-heading mb-6">{{_.core.location}}</h4>
+                    <div class="position-relative">
+                        <div id="map" class="mapbox-gl map-point-animate"
+                            data-mapbox-access-token="pk.eyJ1Ijoia2FyYWRlbml6ZW1pcnIiLCJhIjoiY2xuMzV1b2JiMGZvaDJtcGhreW84M3g1eCJ9.5FVjNkAnoYGLQdCKELBilA"
+                            data-mapbox-options='{"center":[{{product.location.longitude}}, {{product.location.latitude}}],"setLngLat":[{{product.location.longitude}}, {{product.location.latitude}}]}'
+                            data-mapbox-marker='[{"position":[{{product.location.longitude}}, {{product.location.latitude}}],"className":"marker","backgroundImage":"images/googlle-market-01.png","backgroundRepeat":"no-repeat","width":"32px","height":"40px"}]'>
+                        </div>
+                        <p
+                            class="mb-0 p-3 bg-white shadow rounded-lg position-absolute pos-fixed-bottom mb-4 ml-4 lh-17 z-index-2">
+                            {{product.location.address}}</p>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </div>
+</div>
+<section>
+    <div
+        class="d-flex bottom-bar-action bottom-bar-action-01 py-2 px-4 bg-gray-01 align-items-center position-fixed fixed-bottom d-sm-none">
+        <div class="media align-items-center">
+            <img src="/public/images/irene-wallace.png" alt="Irene Wallace" class="mr-4 rounded-circle">
+            <div class="media-body">
+                <a href="#" class="d-block text-dark fs-15 font-weight-500 lh-15">Irene Wallace</a>
+                <span class="fs-13 lh-2">Sales Excutive</span>
+            </div>
+        </div>
+        <div class="ml-auto">
+            <button type="button" class="btn btn-primary fs-18 p-2 lh-1 mr-1 mb-1 shadow-none" data-toggle="modal"
+                data-target="#modal-messenger"><i class="fal fa-comment"></i></button>
+            <a href="tel:(+84)2388-969-888" class="btn btn-primary fs-18 p-2 lh-1 mb-1 shadow-none" target="_blank"><i
+                    class="fal fa-phone"></i></a>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-messenger" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h4 class="modal-title text-heading" id="exampleModalLabel">Contact Form</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body pb-6">
+                    <div class="form-group mb-2">
+                        <input type="text" class="form-control form-control-lg border-0"
+                            placeholder="First Name, Last Name">
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="email" class="form-control form-control-lg border-0" placeholder="Your Email">
+                    </div>
+                    <div class="form-group mb-2">
+                        <input type="tel" class="form-control form-control-lg border-0" placeholder="Your phone">
+                    </div>
+                    <div class="form-group mb-2">
+                        <textarea class="form-control border-0"
+                            rows="4">Hello, I'm interested in Villa Called Archangel</textarea>
+                    </div>
+                    <div class="form-group form-check mb-4">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck3">
+                        <label class="form-check-label fs-13" for="exampleCheck3">Egestas fringilla phasellus faucibus
+                            scelerisque eleifend donec.</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block rounded">Request Info</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

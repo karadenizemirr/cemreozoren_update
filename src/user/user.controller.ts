@@ -31,4 +31,10 @@ export class UserController {
 
         res.redirect(302, '/user/login')
     }
+
+    @Get('logout')
+    async get_logout(@Session() session:secureSession.Session, @Res() res:Response){
+        session.delete()
+        res.redirect(302, '/')
+    }
 }

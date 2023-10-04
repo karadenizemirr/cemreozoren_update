@@ -29,7 +29,7 @@
             </li>
         </ul>
         <div class="tab-content shadow-none p-0">
-            <form action="/dashboard/product/add" method="post" enctype="multipart/form-data">
+            <form action="/dashboard/product/add" method="post" enctype="multipart/form-data" id="product_add_form">
                 <div id="collapse-tabs-accordion">
                     <div class="tab-pane tab-pane-parent fade show active px-0" id="description" role="tabpanel"
                         aria-labelledby="description-tab">
@@ -58,6 +58,16 @@
                                                         <label for="title" class="text-heading">Başlık</label>
                                                         <input type="text" class="form-control form-control-lg border-0"
                                                             id="title" name="title">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Dil" class="text-heading">Dil</label>
+                                                        <select name="language" id="" required
+                                                            class="form-control border-0 shadow-none form-control-lg selectpicker"
+                                                            title="Seçiniz" data-style="btn-lg py-2 h-52">
+                                                            {{#each languages}}
+                                                            <option value="{{this.id}}">{{this.name}}</option>
+                                                            {{/each}}
+                                                        </select>
                                                     </div>
                                                     <div class="form-group mb-0">
                                                         <label for="description-01"
@@ -297,7 +307,7 @@
                                                     <div class="form-group">
                                                         <label for="address" class="text-heading">Adres</label>
                                                         <input type="text" class="form-control form-control-lg border-0"
-                                                            id="address" name="address">
+                                                            id="address" name="address" placeholder="ex: New York, NY">
                                                     </div>
                                                     <div class="form-row mx-n2">
                                                         <div class="col-md-6 col-lg-12 col-xxl-6 px-2">
@@ -355,9 +365,14 @@
                                                 <div class="card-body p-6">
                                                     <h3 class="card-title mb-6 text-heading fs-22 lh-15">
                                                         Haritayı Ayarlayın</h3>
+                                                    <p>
+                                                        Koordinatlar vermiş olduğunuz adres için otomatik olarak
+                                                        belirlenecektir. Güncelleme penceresinden koordinatları
+                                                        düzenleyebilirsiniz.
+                                                    </p>
                                                     <div id="map" class="mapbox-gl map-point-animate mb-6"
                                                         style="height: 296px"
-                                                        data-mapbox-access-token="pk.eyJ1IjoiZHVvbmdsaCIsImEiOiJjanJnNHQ4czExMzhyNDVwdWo5bW13ZmtnIn0.f1bmXQsS6o4bzFFJc8RCcQ"
+                                                        data-mapbox-access-token="pk.eyJ1Ijoia2FyYWRlbml6ZW1pcnIiLCJhIjoiY2xuMzV1b2JiMGZvaDJtcGhreW84M3g1eCJ9.5FVjNkAnoYGLQdCKELBilA"
                                                         data-mapbox-options='{"center":[-73.981566, 40.739011],"setLngLat":[-73.981566, 40.739011]}'
                                                         data-mapbox-marker='[{"position":[-73.981566, 40.739011],"className":"marker","backgroundImage":"images/googlle-market-01.png","backgroundRepeat":"no-repeat","width":"32px","height":"40px"}]'>
                                                     </div>
@@ -598,3 +613,32 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#address').on('input', function () {
+            var address = $('#address').val()
+            var accessToken = "pk.eyJ1Ijoia2FyYWRlbml6ZW1pcnIiLCJhIjoiY2xuMzV1b2JiMGZvaDJtcGhreW84M3g1eCJ9.5FVjNkAnoYGLQdCKELBilA";
+            var geocodingUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${accessToken}`;
+
+            $.ajax({
+                method: 'GET',
+                url: geocodingUrl,
+                dataType: "json",
+                success: function (data) {
+                    if (data.features.length > 0) {
+                        var coordinates = data.features[0].center;
+                        var latitude = coordinates[1];
+                        var longitude = coordinates[0];
+                        $('#latitude').val(latitude);
+                        $('#longitude').val(longitude);
+                    } else {
+                        console.log('No result found for the address')
+                    }
+                },
+                error: function (err) {
+                    console.log('No result found for the address')
+                }
+            })
+        })
+    })
+</script>

@@ -29,6 +29,7 @@
         </ul>
         <div class="tab-content shadow-none p-0">
             <form action="/dashboard/product/update/{{product.id}}" method="post" enctype="multipart/form-data">
+            {{ csrfField }}
                 <div id="collapse-tabs-accordion">
                     <div class="tab-pane tab-pane-parent fade show active px-0" id="description" role="tabpanel"
                         aria-labelledby="description-tab">
@@ -58,6 +59,15 @@
                                                         <input type="text" class="form-control form-control-lg border-0"
                                                             id="title" name="title"
                                                             value="{{product.description.title}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Dil" class="text-heading">Dil</label>
+                                                        <select name="language" id="" required class="form-control border-0 shadow-none form-control-lg selectpicker"
+                                                                    title="Seçiniz" data-style="btn-lg py-2 h-52">
+                                                            {{#each languages}}
+                                                            <option value="{{this.id}}">{{this.name}}</option>
+                                                            {{/each}}
+                                                        </select>
                                                     </div>
                                                     <div class="form-group mb-0">
                                                         <label for="description-01"
