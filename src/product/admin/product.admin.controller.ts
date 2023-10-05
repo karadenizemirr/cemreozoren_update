@@ -37,7 +37,10 @@ export class ProductAdminController {
     }
     @Post('add')
     @UseInterceptors(FilesInterceptor('images', 10, {
-        dest: 'src/assets/public/uploads'
+        dest: 'src/assets/public/uploads',
+        limits: {
+            fileSize: 10 * 1024 * 1024 // 10 MB'lık bir sınır
+        }
     }))
     async post_add_product(@Body() data:any, @UploadedFiles() files:MemoryStorageFile[], @Res() res:Response){
         data.images = files
@@ -71,11 +74,11 @@ export class ProductAdminController {
         dest: 'src/assets/public/uploads'
     }))
     async post_update_product(@Body() data:any, @UploadedFiles()  files: MemoryStorageFile[], @Param('id') id:string, @Res() res:Response){
-
+        data.images = []
         if (files || files.length > 0){
             data.images = files
         }
-        data.images = []
+        
 
         await this.productService.update_product(id, data)
         res.redirect(302, '/dashboard/product')

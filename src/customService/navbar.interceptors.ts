@@ -1,0 +1,28 @@
+import { CallHandler, ExecutionContext, Inject, Injectable, NestInterceptor } from "@nestjs/common";
+import { Observable } from "rxjs";
+import { CategoryService } from "src/category/category.service";
+import { LanguageService } from "src/language/language.service";
+import { ProductService } from "src/product/product.service";
+
+@Injectable()
+export class NavbarInterceptors implements NestInterceptor{
+    constructor(
+        private categoryService: CategoryService,
+        private productService: ProductService,
+        private languageService: LanguageService,
+        @Inject('CACHE_MANAGER') private cacheManager: any
+    ) {
+    }
+    async intercept(context: ExecutionContext, next: CallHandler<any>): Promise<Observable<any>> {
+        const response = context.switchToHttp().getResponse();
+        const category_with_product = await this.categoryService.category_with_product();
+        const products = await this.productService.get_all_product();
+        const languages = await this.languageService.get_all_language();
+        
+
+        response.locals.language = languages
+        response.locals.products = products
+        response.locals.category_with_product = category_with_product
+        return next.handle();
+    }
+}

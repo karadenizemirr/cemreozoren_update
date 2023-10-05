@@ -31,7 +31,6 @@ model Language {
   id        Int        @id @default(autoincrement())
   name      String     @unique
   short     String     @unique
-  product   Product[]
   category  Category[]
   createdAt DateTime   @default(now())
 }
@@ -120,9 +119,6 @@ model Product {
   location    Location?
   detail      Detail?
   createdAt   DateTime     @default(now())
-
-  language   Language?  @relation(fields: [languageId], references: [id], onDelete: SetNull)
-  languageId Int?
   category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   categoryId Int?
 }

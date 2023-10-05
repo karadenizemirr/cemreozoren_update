@@ -37,4 +37,12 @@ export class UserController {
         session.delete()
         res.redirect(302, '/')
     }
+
+    @Get('profile')
+    @Render('admin/profile')
+    async get_profile(){
+        return {
+            title: 'Profilim'
+        }
+    }
 }

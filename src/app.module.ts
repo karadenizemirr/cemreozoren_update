@@ -13,7 +13,6 @@ import { UserModule } from './user/user.module';
 import { ProductService } from './product/product.service';
 import { VisitorService } from './customService/visitor.service';
 import { ProductModule } from './product/product.module';
-import { NavMiddleware } from './customService/nav.middleware';
 import { LanguageAdminModule } from './language/language.admin.module';
 import { LanguageService } from './language/language.service';
 import { I18nInterceptors } from './i18n/i18n.interceptors';
@@ -21,6 +20,7 @@ import { AcceptLanguageResolver, HeaderResolver, I18nModule, QueryResolver } fro
 import * as path from 'path';
 import { CacheModule } from '@nestjs/cache-manager';
 import { CategoryModule } from './category/category.module';
+import { NavbarInterceptors } from './customService/navbar.interceptors';
 
 @Global()
 @Module({
@@ -86,14 +86,13 @@ import { CategoryModule } from './category/category.module';
     {
       provide: APP_INTERCEPTOR,
       useClass: I18nInterceptors
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: NavbarInterceptors
     }
   ],
   exports: [PrismaService, CategoryService, JwtService, CategoryService, ProductService]
 })
-export class AppModule implements NestModule{
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(NavMiddleware)
-      .forRoutes('/*')
-  }
+export class AppModule{
 }

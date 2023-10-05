@@ -5,10 +5,10 @@ import { Prisma } from "@prisma/client";
 
 @Injectable()
 export class ProductService {
-    constructor(private prisma:PrismaService) {}
+    constructor(private prisma: PrismaService) { }
 
-    async create_product(data:any){
-        try{
+    async create_product(data: any) {
+        try {
             const product = await this.prisma.product.create(
                 {
                     data: {
@@ -49,7 +49,7 @@ export class ProductService {
                                 neighbour: data.neighborhood
                             }
                         },
-                        detail:{
+                        detail: {
                             create: {
                                 size_in_ft: data.size_in_ft,
                                 lot_size_in_ft: data.lot_size_in_ft,
@@ -76,27 +76,25 @@ export class ProductService {
                                 id: Number(data.category)
                             }
                         },
-                        language: {
-                            connect: {
-                                id : Number(data.language)
-                            }
-                        }
                     }
                 }
             )
             return product
-        }catch(err){
-            console.log(err)
+        } catch (err) {
             throw new HttpException(err, HttpStatus.BAD_REQUEST);
         }
     }
 
-    async get_all_product(){
-        try{
+    async get_all_product() {
+        try {
             const products = await this.prisma.product.findMany(
                 {
                     include: {
-                        category: true,
+                        category: {
+                            include: {
+                                language: true
+                            }
+                        },
                         media: {
                             include: {
                                 images: true
@@ -105,19 +103,18 @@ export class ProductService {
                         location: true,
                         detail: true,
                         description: true,
-                        language: true
                     }
                 }
             )
             return products
-        }catch(err){
+        } catch (err) {
             throw new HttpException(err, HttpStatus.BAD_REQUEST);
         }
     }
 
 
-    async get_product(id:string){
-        try{
+    async get_product(id: string) {
+        try {
             const product = await this.prisma.product.findMany(
                 {
                     where: {
@@ -131,21 +128,20 @@ export class ProductService {
                             }
                         },
                         location: true,
-                        detail:true,
+                        detail: true,
                         category: true,
-                        language: true
                     }
                 }
             )
 
             return product
-        }catch(err){
-            throw new HttpException(err,HttpStatus.BAD_GATEWAY)
+        } catch (err) {
+            throw new HttpException(err, HttpStatus.BAD_GATEWAY)
         }
     }
 
-    async delete_product(id:string){
-        try{
+    async delete_product(id: string) {
+        try {
             await this.prisma.product.deleteMany(
                 {
                     where: {
@@ -154,13 +150,25 @@ export class ProductService {
                 }
             )
             return true
-        }catch(err){
+        } catch (err) {
             throw new HttpException(err, HttpStatus.BAD_GATEWAY)
         }
     }
 
-    async update_product(id:string, data:any){
-        try{
+    async update_product(id: string, data: any) {
+        try {
+            const create_new_image = []
+            for (const image of data.images) {
+                const create_image = await this.prisma.images.create(
+                    {
+                        data: {
+                            path: image.filename
+                        }
+                    }
+                )
+
+                create_new_image.push(create_image.id)
+            }
             await this.prisma.product.update(
                 {
                     where: {
@@ -168,25 +176,17 @@ export class ProductService {
                     },
                     data: {
                         media: {
-                            upsert: {
-                                create: {
-                                    images: {
-                                        createMany: {
-                                            data: data.images.map(image => {
-                                                return {
-                                                    path: image.filename
-                                                }
-                                            })
+                            update: {
+                                video: data.video,
+                                virtual_tour: data.virtual_tour,
+                                images: {
+                                    connect: create_new_image.map((id: number) => {
+                                        return {
+                                            id: id
                                         }
-                                    },
-                                    video: data.video,
-                                    virtual_tour: data.virtual_tour
-                                },
-                                update: {
-                                    video: data.video,
-                                    virtual_tour: data.virtual_tour
+                                    })
                                 }
-                            }
+                            },
                         },
                         location: {
                             update: {
@@ -223,7 +223,7 @@ export class ProductService {
                             }
                         },
                         description: {
-                            update:{
+                            update: {
                                 title: data.title,
                                 description: data.description,
                                 price_in: data.price_in,
@@ -238,24 +238,19 @@ export class ProductService {
                             connect: {
                                 id: Number(data.category)
                             }
-                        },
-                        language: {
-                            connect: {
-                                id: Number(data.language)
-                            }
                         }
                     }
                 }
             )
-        }catch(err){
+        } catch (err) {
             console.log(err)
             throw new HttpException('PRoduct update error', HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
 
 
-    async product_image_delete(img_id:Number){
-        try{
+    async product_image_delete(img_id: Number) {
+        try {
             const image = await this.prisma.images.findUnique({
                 where: {
                     id: Number(img_id)
@@ -276,54 +271,59 @@ export class ProductService {
             } else {
                 throw new HttpException('Image not found', HttpStatus.NOT_FOUND);
             }
-        }catch(err){
+        } catch (err) {
             throw new HttpException('Image remove error', HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
+    async product_search(category_key: string, location_key: string, keyword_key: string) {
+        try {
+            const where: any = {};
 
-    async product_search(category:string, location:string, keyword:string){
-        try{
-            const result = await this.prisma.product.findMany(
-                {
-                    where: {
-                        OR: [
-                            {category: {
-                                name: {
-                                    contains: category
-                                }
-                            }},
-                            {
-                                location: {
-                                    address: {
-                                        contains: location
-                                    }
-                                }
-                            },
-                            {
-                                description: {
-                                    title: {
-                                        contains: keyword
-                                    }
-                                }
-                            }
-                        ]
-                    },
-                    include: {
-                        description: true,
-                        media: {
-                            include: {
-                                images: true
-                            }
-                        },
-                        location: true,
-                        detail: true,
-                        category: true
+            if (category_key) {
+                where.category = {
+                    name: {
+                        contains: category_key,
+                        mode: 'insensitive'
                     }
+                };
+            }
+
+            if (location_key) {
+                where.location = {
+                    address: {
+                        contains: location_key,
+                        mode: 'insensitive'
+                    }
+                };
+            }
+
+            if (keyword_key) {
+                where.description = {
+                    title: {
+                        contains: keyword_key,
+                        mode: 'insensitive'
+                    }
+                };
+            }
+
+            const result = await this.prisma.product.findMany({
+                where,
+                include: {
+                    description: true,
+                    media: {
+                        include: {
+                            images: true
+                        }
+                    },
+                    location: true,
+                    detail: true,
+                    category: true
                 }
-            )
-            return result
-        }catch(err){
-            throw new HttpException('Product search error', HttpStatus.INTERNAL_SERVER_ERROR)
+            });
+
+            return result;
+        } catch (err) {
+            throw new HttpException('Product search error', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

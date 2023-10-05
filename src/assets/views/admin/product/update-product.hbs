@@ -60,17 +60,6 @@
                                                             id="title" name="title"
                                                             value="{{product.description.title}}">
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="Dil" class="text-heading">Dil</label>
-                                                        <select name="language" id="" required
-                                                            class="form-control border-0 shadow-none form-control-lg selectpicker"
-                                                            title="Seçiniz" data-style="btn-lg py-2 h-52">
-                                                            {{#each languages}}
-                                                            <option value="{{this.id}}" {{selected this.id
-                                                                ...product.language.id}}>{{this.name}}</option>
-                                                            {{/each}}
-                                                        </select>
-                                                    </div>
                                                     <div class="form-group mb-0">
                                                         <label for="description-01"
                                                             class="text-heading">Açıklaması</label>

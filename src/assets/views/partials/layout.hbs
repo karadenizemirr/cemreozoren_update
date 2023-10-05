@@ -111,7 +111,7 @@
                   <h5 class="fs-13 letter-spacing-087 text-muted mb-3 text-uppercase px-3">Manage Acount</h5>
                   <ul class="list-group list-group-no-border rounded-lg">
                     <li class="list-group-item px-3 px-xl-4 py-2 sidebar-item">
-                      <a href="dashboard-my-profiles.html" class="text-heading lh-1 sidebar-link">
+                      <a href="/user/profile" class="text-heading lh-1 sidebar-link">
                         <span class="sidebar-item-icon d-inline-block mr-3 text-muted fs-20">
                           <svg class="icon icon-my-profile">
                             <use xlink:href="#icon-my-profile"></use>
@@ -261,9 +261,9 @@
                     class="text-uppercase font-weight-500 opacity-7 text-white letter-spacing-093 mb-1">{{_.core.category}}</label>
                   <select
                     class="form-control selectpicker bg-transparent border-bottom rounded-0 border-input-opacity-02"
-                    name="type" title="{{_.core.select}}" data-style="p-0 h-24 lh-17 text-white">
+                    name="category" title="{{_.core.select}}" data-style="p-0 h-24 lh-17 text-white">
                     {{#each category_with_product}}
-                    <option value="{{this.name}}">{{this.name}}</option>
+                      <option value="{{this.name}}">{{this.name}}</option>
                     {{/each}}
                   </select>
                 </div>
@@ -274,7 +274,9 @@
                     class="form-control selectpicker bg-transparent border-bottom rounded-0 border-input-opacity-02"
                     name="location" title="{{_.core.select}}" data-style="p-0 h-24 lh-17 text-white">
                     {{#each category_with_product}}
-                    <option value="{{this.name}}">{{this.name}}</option>
+                    {{#each this.products}}
+                      <option value="{{location.city}}">{{location.city}}</option>
+                    {{/each}}
                     {{/each}}
                   </select>
                 </div>
@@ -1123,5 +1125,4 @@
       title="Back To Top"><i class="fal fa-arrow-up"></i></a>
   </div>
 </body>
-
 </html>

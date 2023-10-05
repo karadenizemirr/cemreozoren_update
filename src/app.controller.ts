@@ -24,15 +24,8 @@ export class AppController {
   @Get()
   @Render('index')
   async getHello(@Res() res: Response, @Session() session: secureSession.Session) {
-    const category_with_product = await this.categoryService.category_with_product()
-    const products = await this.productService.get_all_product()
-    const language = await this.languageService.get_all_language()
-
     return {
       title: 'Anasayfa',
-      category_with_product: category_with_product,
-      products: products,
-      language: language
     }
   }
 

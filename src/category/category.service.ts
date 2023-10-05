@@ -85,7 +85,6 @@ export class CategoryService {
                             include: {
                                 description: true,
                                 location: true,
-                                language: true
                             }
                         },
                         language: true
@@ -108,7 +107,6 @@ export class CategoryService {
                         include: {
                             description: true,
                             location: true,
-                            language: true,
                             detail: true,
                             media: {
                                 include: {

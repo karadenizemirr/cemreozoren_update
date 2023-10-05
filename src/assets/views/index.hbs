@@ -17,7 +17,7 @@
         <h2 class="text-dark text-center mb-8">{{_.core.last_product}}</h2>
         <div class="row">
             {{#each products}}
-            {{#eq this.language.short ...lang}}
+            {{#eq this.category.language.short ...lang}}
             <div class="col-lg-4 col-sm-6 mb-6" data-animate="zoomIn">
                 <div class="card shadow-hover-1">
                     <div class="hover-change-image bg-hover-overlay rounded-lg card-img-top">
@@ -131,7 +131,7 @@
         <div class="slick-slider mx-0 custom-arrow-spacing-30" data-animate="fadeInRight"
             data-slick-options='{"slidesToShow": 1,"dots":false,"responsive":[{"breakpoint": 992,"settings": {"slidesToShow":1,"arrows":false}},{"breakpoint": 768,"settings": {"slidesToShow": 1,"arrows":false,"autoplay":true}},{"breakpoint": 576,"settings": {"slidesToShow": 1,"arrows":false}}]}'>
             {{#each products}}
-            {{#eq this.language.short ...lang}}
+            {{#eq this.category.language.short ...lang}}
             <div class="box px-0">
                 <div
                     class="media d-flex flex-column flex-md-row align-items-md-center py-lg-8 position-relative cusstom-bg-slider-gray no-gutters">

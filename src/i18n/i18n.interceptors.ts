@@ -12,7 +12,7 @@ export class I18nInterceptors implements NestInterceptor {
         const request = context.switchToHttp().getRequest()
         const session = request.session as secureSession
 
-        let lang:string;
+        let lang:string = 'tr'
 
         if (session && session['lang']){
             lang = session['lang']

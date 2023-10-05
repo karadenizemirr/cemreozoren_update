@@ -22,6 +22,25 @@ export class LanguageService {
         }
     }
 
+    async language_update(data:any, id:number){
+        try{
+            await this.prisma.language.update(
+                {
+                    where:{
+                        id: Number(id)
+                    },
+                    data: {
+                        ...data
+                    }
+                }
+            )
+
+            return true
+        }catch(err){
+            throw new HttpException('Language update error', HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
     async get_all_language() {
         try {
             const languages = await this.prisma.language.findMany()
