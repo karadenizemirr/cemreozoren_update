@@ -20,6 +20,7 @@ import { I18nInterceptors } from './i18n/i18n.interceptors';
 import { AcceptLanguageResolver, HeaderResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import * as path from 'path';
 import { CacheModule } from '@nestjs/cache-manager';
+import { CategoryModule } from './category/category.module';
 
 @Global()
 @Module({
@@ -32,6 +33,7 @@ import { CacheModule } from '@nestjs/cache-manager';
     UserModule,
     ProductModule,
     LanguageAdminModule,
+    CategoryModule,
     ConfigModule.forRoot({
       isGlobal : true,
       envFilePath: '.env'

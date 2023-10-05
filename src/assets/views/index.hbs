@@ -53,22 +53,22 @@
                         </p>
                         <ul class="list-inline d-flex justify-content-between mb-0 flex-wrap mr-n5">
                             <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-5"
-                                data-toggle="tooltip" title="3 Bedroom"><svg
+                                data-toggle="tooltip" title="{{this.detail.bedrooms}} Br."><svg
                                     class="icon icon-bedroom fs-18 text-primary mr-1">
                                     <use xlink:href="#icon-bedroom"></use>
-                                </svg>{{this.detail.bedrooms}}</li>
+                                </svg>{{this.detail.bedrooms}} Br.</li>
                             <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-5"
-                                data-toggle="tooltip" title="3 Bathrooms"><svg
+                                data-toggle="tooltip" title="{{this.detail.bathrooms}} Ba"><svg
                                     class="icon icon-shower fs-18 text-primary mr-1">
                                     <use xlink:href="#icon-shower"></use>
                                 </svg>{{this.detail.bathrooms}} Ba</li>
                             <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-5"
-                                data-toggle="tooltip" title="Size"><svg
+                                data-toggle="tooltip" title="{{this.detail.size_in_ft}}m&sup2;"><svg
                                     class="icon icon-square fs-18 text-primary mr-1">
                                     <use xlink:href="#icon-square"></use>
-                                </svg>{{this.detail.size_in_ft}}</li>
+                                </svg>{{this.detail.size_in_ft}}m&sup2;</li>
                             <li class="list-inline-item text-gray font-weight-500 fs-13 d-flex align-items-center mr-5"
-                                data-toggle="tooltip" title="1 Garage"><svg
+                                data-toggle="tooltip" title="{{this.detail.garages}} Gr"><svg
                                     class="icon icon-Garage fs-18 text-primary mr-1">
                                     <use xlink:href="#icon-Garage"></use>
                                 </svg>{{this.detail.garages}} Gr</li>
@@ -108,7 +108,7 @@
             {{#each category_with_product}}
             {{#eq this.language.short ...lang}}
             <div class="box px-0 py-6" data-animate="fadeInUp">
-                <a href="listing-with-left-sidebar.html"
+                <a href="/category/{{this.id}}"
                     class="card border-0 align-items-center justify-content-center pt-7 pb-5 px-3 shadow-hover-3 bg-transparent bg-hover-white text-decoration-none">
                     <img src="/public/images/verified.png" class="card-img-top" alt="Apartment">
                     <div class="card-body px-0 pt-5 pb-0">
@@ -155,7 +155,7 @@
                         <ul class="row list-inline mb-0 py-3">
                             <li class="col-sm-6">
                                 <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block"
-                                    data-toggle="tooltip" title="3 Bedrooms">
+                                    data-toggle="tooltip" title="{{this.detail.bedrooms}} {{..._.core.bedrooms}}">
                                     <svg class="icon icon-bedroom fs-24 text-primary mr-2">
                                         <use xlink:href="#icon-bedroom"></use>
                                     </svg>
@@ -164,7 +164,7 @@
                             </li>
                             <li class="col-sm-6">
                                 <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block"
-                                    data-toggle="tooltip" title="3 Bathrooms">
+                                    data-toggle="tooltip" title="{{this.detail.bathrooms}} {{..._.core.bathrooms}}">
                                     <svg class="icon icon-shower fs-24 text-primary mr-2">
                                         <use xlink:href="#icon-shower"></use>
                                     </svg>
@@ -173,7 +173,7 @@
                             </li>
                             <li class="col-sm-6">
                                 <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block"
-                                    data-toggle="tooltip" title="Size">
+                                    data-toggle="tooltip" title="{{this.detail.size_in_ft}}     &#13217;">
                                     <svg class="icon icon-square fs-24 text-primary mr-2">
                                         <use xlink:href="#icon-square"></use>
                                     </svg>
@@ -182,11 +182,11 @@
                             </li>
                             <li class="col-sm-6">
                                 <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block"
-                                    data-toggle="tooltip" title="1 Garage">
+                                    data-toggle="tooltip" title="{{this.detail.garages}} {{..._.core.garages}}">
                                     <svg class="icon icon-Garage fs-24 text-primary mr-2">
                                         <use xlink:href="#icon-Garage"></use>
                                     </svg>
-                                    {{this.detail.garages}} Garage
+                                    {{this.detail.garages}} {{..._.core.garages}}
                                 </p>
                             </li>
                         </ul>
@@ -223,18 +223,16 @@
         <div class="row">
             <div class="col-ld-6 col-sm-7" data-animate="fadeInLeft">
                 <div class="pl-6 border-4x border-left border-primary">
-                    <h2 class="text-heading lh-15 fs-md-32 fs-25">For more information about our services,<span
-                            class="text-primary"> get in touch</span> with our expert consultants</h2>
-                    <p class="lh-2 fs-md-15 mb-0">10 new offers every day. 350 offers on site, Trusted by a
-                        community of thousands of users.</p>
+                    <h2 class="text-heading lh-15 fs-md-32 fs-25">{{_.core.contact_slogan_1}},<span
+                            class="text-primary"> {{_.core.contact_slogan_2}}</h2>
                 </div>
             </div>
             <div class="col-ld-6 col-sm-5 text-center mt-sm-0 mt-8" data-animate="fadeInRight">
                 <i class="fal fa-phone fs-40 text-primary"></i>
-                <p class="fs-13 font-weight-500 letter-spacing-173 text-uppercase lh-2 mt-3">Call for help now!
+                <p class="fs-13 font-weight-500 letter-spacing-173 text-uppercase lh-2 mt-3">{{_.core.call}}
                 </p>
                 <p class="fs-md-42 fs-32 font-weight-600 text-secondary lh-1">1900 68668</p>
-                <a href="#" class="btn btn-lg btn-primary mt-2 px-10">Contact us</a>
+                <a href="#" class="btn btn-lg btn-primary mt-2 px-10">{{_.core.contact}}</a>
             </div>
         </div>
     </div>

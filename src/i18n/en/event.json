@@ -29,6 +29,14 @@
         "garage_size": "Garage Size",
         "price":"Price",
         "status": "Status",
-        "virtual_tour": "Virtual Tour"
+        "virtual_tour": "Virtual Tour",
+        "select_language":"Select Language",
+        "contact_slogan_1": "Hakkımızda daha fazla bilgi için",
+        "contact_slogan_2": "Hizmetlerinde uzmanlaşmış danışmanlarımızla hizmete geçin",
+        "contact": "İletişim",
+        "call": "Bize Ulaşın",
+        "quick_link": "Hızlı Bağlantılar",
+        "newsletter_slogan": "Abone olarak son gelişmelerden haberdar olun.",
+        "subscribe": "Abone Ol"
     }
 }

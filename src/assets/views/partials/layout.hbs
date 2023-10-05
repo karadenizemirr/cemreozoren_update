@@ -178,34 +178,23 @@
                   <span class="caret"></span>
                 </a>
               </li>
-              <li id="navbar-item-property" aria-haspopup="true" aria-expanded="false"
+              <li id="navbar-item-home" aria-haspopup="true" aria-expanded="false"
                 class="nav-item dropdown py-2 py-lg-5 px-0 px-lg-4">
-                <a class="nav-link dropdown-toggle p-0" href="listing.html" data-toggle="dropdown">
+                <a class="nav-link dropdown-toggle p-0" href="index.html" data-toggle="dropdown">
                   {{_.core.category}}
                   <span class="caret"></span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-xxl px-0 py-3 dropdown-menu-listing"
-                  aria-labelledby="navbar-item-property">
-                  <div class="row no-gutters">
-                    {{#each category_with_product}}
-                    {{#eq this.language.short ...lang}}
-                    <div class="col-lg-3">
-                      <!-- Heading -->
-                      <h4 class="dropdown-header text-dark fs-16 mb-2">
-                        {{this.name}}
-                      </h4>
-                      <!-- List -->
-                      {{#each this.products}}
-                      <a class="dropdown-item" href="/product/{{this.id}}">
-                        {{this.description.title}}
-                      </a>
-                      {{/each}}
-                    </div>
-                    {{/eq}}
-                    {{/each}}
-                  </div>
-                  <!-- / .row -->
-                </div>
+                <ul class="dropdown-menu pt-3 pb-0 pb-lg-3" aria-labelledby="navbar-item-home">
+                  {{#each category_with_product}}
+                  {{#eq this.language.short ...lang}}
+                  <li class="dropdown-item">
+                    <a id="navbar-link-home-01" class="dropdown-link" href="/category/{{this.id}}">
+                      {{this.name}}
+                    </a>
+                  </li>
+                  {{/eq}}
+                  {{/each}}
+                </ul>
               </li>
             </ul>
             <div class="d-block d-lg-none">
@@ -213,7 +202,7 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle mr-md-2 pr-2 pl-0 pl-lg-2" href="#" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    TR
+                    {{_.core.select_language}}
                   </a>
                   <div class="dropdown-menu dropdown-sm dropdown-menu-left">
                     {{#each language}}
@@ -239,7 +228,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-md-2 pr-2 pl-0 pl-lg-2" href="#" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false" style="text-transform: uppercase;">
-                  {{lang}}
+                  {{_.core.select_language}}
                 </a>
                 <div class="dropdown-menu dropdown-sm dropdown-menu-right">
                   {{#each language}}
@@ -285,16 +274,15 @@
                     class="form-control selectpicker bg-transparent border-bottom rounded-0 border-input-opacity-02"
                     name="location" title="{{_.core.select}}" data-style="p-0 h-24 lh-17 text-white">
                     {{#each category_with_product}}
-                    {{#each this.products}}
-                    <option value="{{this.location.city}}">{{this.location.city}}</option>
-                    {{/each}}
+                    <option value="{{this.name}}">{{this.name}}</option>
                     {{/each}}
                   </select>
                 </div>
               </div>
             </div>
             <div class="col-12 col-lg-5 pt-lg-0 pt-6">
-              <label class="text-uppercase font-weight-500 opacity-7 text-white letter-spacing-093">{{_.core.search}}</label>
+              <label
+                class="text-uppercase font-weight-500 opacity-7 text-white letter-spacing-093">{{_.core.search}}</label>
               <div class="position-relative">
                 <input type="text" name="search"
                   class="form-control bg-transparent shadow-none border-top-0 border-right-0 border-left-0 border-bottom rounded-0 h-24 lh-17 p-0 pr-md-5 text-white placeholder-light font-weight-500 border-input-opacity-02"
@@ -366,7 +354,7 @@
       <div class="row">
         <div class="col-md-6 col-lg-4 mb-6 mb-md-0">
           <a class="d-block mb-2" href="#">
-            <img src="images/logo-white-primary.png" alt="HomeID">
+            <img src="/public/images/logo-white-primary.png" alt="HomeID">
           </a>
           <div class="lh-26 font-weight-500">
             <p class="mb-0">58 Howard Street #2 San Francisco</p>
@@ -377,21 +365,15 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-2 mb-6 mb-md-0">
-          <h4 class="text-white fs-16 my-4 font-weight-500">Popular Searches</h4>
+          <h4 class="text-white fs-16 my-4 font-weight-500">
+            {{_.core.category}}
+          </h4>
           <ul class="list-group list-group-flush list-group-no-border">
+            {{#each category_with_product}}
             <li class="list-group-item bg-transparent p-0">
-              <a href="#" class="text-muted lh-26 font-weight-500 hover-white">Apartment for Rent</a>
+              <a href="/category/{{this.id}}" class="text-muted lh-26 font-weight-500 hover-white">{{this.name}}</a>
             </li>
-            <li class="list-group-item bg-transparent p-0">
-              <a href="#" class="text-muted lh-26 font-weight-500 hover-white">Apartment Low to
-                hide</a>
-            </li>
-            <li class="list-group-item bg-transparent p-0">
-              <a href="#" class="text-muted lh-26 font-weight-500 hover-white">Offices for Buy</a>
-            </li>
-            <li class="list-group-item bg-transparent p-0">
-              <a href="#" class="text-muted lh-26 font-weight-500 hover-white">Offices for Rent</a>
-            </li>
+            {{/each}}
           </ul>
         </div>
         <div class="col-md-6 col-lg-2 mb-6 mb-md-0">
@@ -412,15 +394,14 @@
           </ul>
         </div>
         <div class="col-md-6 col-lg-4 mb-6 mb-md-0">
-          <h4 class="text-white fs-16 my-4 font-weight-500">Sign Up for Our Newsletter</h4>
-          <p class="font-weight-500 text-muted lh-184">Lorem ipsum dolor sit amet, consecte tur cing elit.
-            Suspe ndisse suscipit sagittis </p>
+          <h4 class="text-white fs-16 my-4 font-weight-500">{{_.core.login}}</h4>
+          <p class="font-weight-500 text-muted lh-184">{{_.core.newsletter_slogan}} </p>
           <form>
             <div class="input-group input-group-lg mb-6">
               <input type="text" name="email" required class="form-control bg-white shadow-none border-0 z-index-1"
                 placeholder="Your email">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">Subscribe</button>
+                <button class="btn btn-primary" type="submit">{{_.core.subscribe}}</button>
               </div>
             </div>
           </form>

@@ -29,7 +29,7 @@
         </ul>
         <div class="tab-content shadow-none p-0">
             <form action="/dashboard/product/update/{{product.id}}" method="post" enctype="multipart/form-data">
-            {{ csrfField }}
+                {{ csrfField }}
                 <div id="collapse-tabs-accordion">
                     <div class="tab-pane tab-pane-parent fade show active px-0" id="description" role="tabpanel"
                         aria-labelledby="description-tab">
@@ -62,10 +62,12 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="Dil" class="text-heading">Dil</label>
-                                                        <select name="language" id="" required class="form-control border-0 shadow-none form-control-lg selectpicker"
-                                                                    title="Seçiniz" data-style="btn-lg py-2 h-52">
+                                                        <select name="language" id="" required
+                                                            class="form-control border-0 shadow-none form-control-lg selectpicker"
+                                                            title="Seçiniz" data-style="btn-lg py-2 h-52">
                                                             {{#each languages}}
-                                                            <option value="{{this.id}}">{{this.name}}</option>
+                                                            <option value="{{this.id}}" {{selected this.id
+                                                                ...product.language.id}}>{{this.name}}</option>
                                                             {{/each}}
                                                         </select>
                                                     </div>
@@ -242,7 +244,7 @@
                                                 <div class="col-sm-4">
                                                     <a href="#" onclick="confirmDelete('{{id}}')">
                                                         <img src="/public/uploads/{{path}}" alt="" id="product_img"
-                                                        style="cursor: pointer;">
+                                                            style="cursor: pointer;">
                                                     </a>
                                                 </div>
                                                 {{/each}}
@@ -391,11 +393,10 @@
                                                 <div class="card-body p-6">
                                                     <h3 class="card-title mb-6 text-heading fs-22 lh-15">
                                                         Haritayı Ayarlayın</h3>
-                                                    <div id="map" class="mapbox-gl map-point-animate mb-6"
-                                                        style="height: 296px"
-                                                        data-mapbox-access-token="pk.eyJ1IjoiZHVvbmdsaCIsImEiOiJjanJnNHQ4czExMzhyNDVwdWo5bW13ZmtnIn0.f1bmXQsS6o4bzFFJc8RCcQ"
-                                                        data-mapbox-options='{"center":[-73.981566, 40.739011],"setLngLat":[-73.981566, 40.739011]}'
-                                                        data-mapbox-marker='[{"position":[-73.981566, 40.739011],"className":"marker","backgroundImage":"images/googlle-market-01.png","backgroundRepeat":"no-repeat","width":"32px","height":"40px"}]'>
+                                                    <div id="map" class="mapbox-gl map-point-animate"
+                                                        data-mapbox-access-token="pk.eyJ1Ijoia2FyYWRlbml6ZW1pcnIiLCJhIjoiY2xuMzV1b2JiMGZvaDJtcGhreW84M3g1eCJ9.5FVjNkAnoYGLQdCKELBilA"
+                                                        data-mapbox-options='{"center":[{{product.location.longitude}}, {{product.location.latitude}}],"setLngLat":[{{product.location.longitude}}, {{product.location.latitude}}]}'
+                                                        data-mapbox-marker='[{"position":[{{product.location.longitude}}, {{product.location.latitude}}],"className":"marker","backgroundImage":"images/googlle-market-01.png","backgroundRepeat":"no-repeat","width":"32px","height":"40px"}]'>
                                                     </div>
                                                     <div class="form-row mx-n2">
                                                         <div class="col-md-6 col-lg-12 col-xxl-6 px-2">
@@ -653,7 +654,7 @@
 </div>
 
 <script>
-    function confirmDelete(id){
+    function confirmDelete(id) {
         Swal.fire({
             title: 'Görsel Silinsin Mi?',
             text: 'Görsel silmek istiyor musunuz?',

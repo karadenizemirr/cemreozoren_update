@@ -78,7 +78,7 @@ export class ProductService {
                         },
                         language: {
                             connect: {
-                                id: Number(data.language)
+                                id : Number(data.language)
                             }
                         }
                     }
@@ -86,6 +86,7 @@ export class ProductService {
             )
             return product
         }catch(err){
+            console.log(err)
             throw new HttpException(err, HttpStatus.BAD_REQUEST);
         }
     }
@@ -309,7 +310,11 @@ export class ProductService {
                     },
                     include: {
                         description: true,
-                        media: true,
+                        media: {
+                            include: {
+                                images: true
+                            }
+                        },
                         location: true,
                         detail: true,
                         category: true

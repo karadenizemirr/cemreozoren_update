@@ -1,19 +1,18 @@
 <section class="pb-9 pb-md-11 mt-5">
     <div class="container">
-        {{#each result}}
+        {{#each products}}
 
         <div
             class="media d-flex flex-column flex-md-row align-items-md-center py-lg-8 position-relative cusstom-bg-slider-gray no-gutters">
             <div class="mr-lg-10 mr-md-6 card border-0 col-md-6">
                 {{#with (lookup this.media.images 0)}}
-                    <img src="/public/uploads/{{path}}" alt="Home in Metric Way" class="card-img">
+                <img src="/public/uploads/{{path}}" alt="Home in Metric Way" class="card-img">
                 {{/with}}
-                </h2>
                 <div class="card-img-overlay p-2">
                     {{#eq this.description.propert_status 'sale'}}
-                    <span class="badge badge-indigo position-absolute pos-fixed-top">{{..._.core.sale}}</span>
+                    <span class="badge badge-indigo position-absolute pos-fixed-top">Satılık</span>
                     {{else}}
-                    <span class="badge badge-primary position-absolute pos-fixed-top">{{..._.core.sale}}</span>
+                    <span class="badge badge-primary position-absolute pos-fixed-top">Kiralık</span>
                     {{/eq}}
                 </div>
             </div>
@@ -25,7 +24,7 @@
                 <ul class="row list-inline mb-0 py-3">
                     <li class="col-sm-6">
                         <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block" data-toggle="tooltip"
-                            title="{{this.detail.bedrooms}} {{..._.core.bedrooms}}">
+                            title="3 Bedrooms">
                             <svg class="icon icon-bedroom fs-24 text-primary mr-2">
                                 <use xlink:href="#icon-bedroom"></use>
                             </svg>
@@ -34,7 +33,7 @@
                     </li>
                     <li class="col-sm-6">
                         <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block" data-toggle="tooltip"
-                            title="{{this.detail.bathrooms}} {{..._.core.bathrooms}}">
+                            title="3 Bathrooms">
                             <svg class="icon icon-shower fs-24 text-primary mr-2">
                                 <use xlink:href="#icon-shower"></use>
                             </svg>
@@ -43,7 +42,7 @@
                     </li>
                     <li class="col-sm-6">
                         <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block" data-toggle="tooltip"
-                            title="{{this.detail.size_in_ft}} &#13217;">
+                            title="Size">
                             <svg class="icon icon-square fs-24 text-primary mr-2">
                                 <use xlink:href="#icon-square"></use>
                             </svg>
@@ -52,11 +51,11 @@
                     </li>
                     <li class="col-sm-6">
                         <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block" data-toggle="tooltip"
-                            title="{{this.detail.garages}}{{..._.core.garages}}">
+                            title="1 Garage">
                             <svg class="icon icon-Garage fs-24 text-primary mr-2">
                                 <use xlink:href="#icon-Garage"></use>
                             </svg>
-                            {{this.detail.garages}}{{..._.core.garages}}
+                            {{this.detail.garages}} Garage
                         </p>
                     </li>
                 </ul>

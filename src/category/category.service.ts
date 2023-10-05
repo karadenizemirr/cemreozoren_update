@@ -63,8 +63,13 @@ export class CategoryService {
                     id: Number(id)
                 },
                 data: {
-                  ...data
-                }
+                    name: data.name,
+                    language: {
+                        connect: {
+                            id: Number(data.language)
+                        }
+                    }
+                },
             })
         }catch(err){
             throw new HttpException('Category update error', HttpStatus.INTERNAL_SERVER_ERROR)
@@ -87,6 +92,33 @@ export class CategoryService {
                     }
                 }
             )
+        }catch(err){
+            throw new HttpException('Get category error', HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
+
+    async category_with_id_product(id:number){
+        try{
+            return await this.prisma.category.findMany({
+                where: {
+                    id: Number(id)
+                },
+                include: {
+                    products: {
+                        include: {
+                            description: true,
+                            location: true,
+                            language: true,
+                            detail: true,
+                            media: {
+                                include: {
+                                    images: true
+                                }
+                            }
+                        }
+                    }
+                }
+            })
         }catch(err){
             throw new HttpException('Get category error', HttpStatus.INTERNAL_SERVER_ERROR)
         }

@@ -1,4 +1,4 @@
-POST https://cemreozoren-f4f3e83aae2b.herokuapp.com/user/register
+POST http://localhost:3000/user/register
 Content-Type: application/json
 
 {

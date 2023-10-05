@@ -1,9 +1,9 @@
 <div class="px-3 px-lg-6 px-xxl-13 py-5 py-lg-10">
     <div class="d-flex flex-wrap flex-md-nowrap mb-6">
         <div class="mr-0 mr-md-auto">
-            <h2 class="mb-0 text-heading fs-22 lh-15">Emlaklar
+            <h2 class="mb-0 text-heading fs-22 lh-15">Kategoriler
             </h2>
-            <p>Tüm emlaklara bu sayfadan ulaşabilirsiniz</p>
+            <p>Kategorilerinizi buradan yönetin</p>
         </div>
         <div class="form-inline justify-content-md-end mx-n2">
             <div class="p-2">
@@ -65,14 +65,14 @@
                             <input type="text" class="form-control" value="{{this.name}}" name="name">
                         </td>
                         <td>
-                            <select name="" id="" class="form-control">
+                            <select name="language" id="" class="form-control">
                                 {{#each ...language}}
                                 <option value="{{this.id}}" {{selected this.id ...this.language.id}}>{{this.name}}</option>
                                 {{/each}}
                             </select>
                         </td>
                         <td>
-                            <input type="date" class="form-control" value="{{this.created_at}}" disabled>
+                            <input type="text" class="form-control" value="{{datetime this.created_at}}" disabled>
                         </td>
                         <td>
                             <div class="dropdown">

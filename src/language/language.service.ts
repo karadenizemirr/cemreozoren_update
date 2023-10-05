@@ -41,6 +41,7 @@ export class LanguageService {
                 }
             )
         }catch(err){
+            console.log(err)
             throw new HttpException('Language error', HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
