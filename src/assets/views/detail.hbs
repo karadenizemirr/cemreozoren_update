@@ -15,12 +15,6 @@
             <div class="position-absolute pos-fixed-top-right z-index-3">
                 <ul class="list-inline pt-4 pr-5">
                     <li class="list-inline-item mr-2">
-                        <a href="#" data-toggle="tooltip" title=""
-                            class="d-flex align-items-center justify-content-center w-40px h-40 bg-white text-heading bg-hover-primary hover-white rounded-circle"
-                            data-original-title="Favourite">
-                            <i class="far fa-heart"></i></a>
-                    </li>
-                    <li class="list-inline-item mr-2">
                         <button type="button"
                             class="btn btn-white p-0 d-flex align-items-center justify-content-center w-40px h-40 text-heading bg-hover-primary hover-white rounded-circle border-0 shadow-none"
                             data-container="body" data-toggle="popover" data-placement="top" data-html="true"
@@ -45,13 +39,6 @@
                   '>
                             <i class="far fa-share-alt"></i>
                         </button>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#" data-toggle="tooltip" title=""
-                            class="d-flex align-items-center justify-content-center w-40px h-40 bg-white text-heading bg-hover-primary hover-white rounded-circle"
-                            data-original-title="Print">
-                            <i class="far fa-print"></i>
-                        </a>
                     </li>
                 </ul>
             </div>
@@ -105,7 +92,6 @@
                             <p class="fs-22 text-heading font-weight-bold mb-0">
                                 {{product.description.before_price_label}}&nbsp;{{product.description.price_in}}&nbsp;{{product.description.after_price_label}}
                             </p>
-                            <p class="mb-0">$9350/SqFt</p>
                         </div>
                     </div>
                     <h4 class="fs-22 text-heading mt-6 mb-2">{{_.core.description}}</h4>
@@ -195,7 +181,7 @@
                         </dl>
                         <dl class="col-sm-6 mb-0 d-flex">
                             <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.status}}</dt>
-                            <dd>{{product.description.propert_status}}</dd>
+                            <dd>{{#eq product.description.propert_status 'sale'}}{{_.core.sale}}{{else}}{{_.core.rent}}{{/eq}}</dd>
                         </dl>
                         <dl class="col-sm-6 mb-0 d-flex">
                             <dt class="w-110px fs-14 font-weight-500 text-heading pr-2">{{_.core.rooms}}</dt>
@@ -254,55 +240,3 @@
         </div>
     </div>
 </div>
-<section>
-    <div
-        class="d-flex bottom-bar-action bottom-bar-action-01 py-2 px-4 bg-gray-01 align-items-center position-fixed fixed-bottom d-sm-none">
-        <div class="media align-items-center">
-            <img src="/public/images/irene-wallace.png" alt="Irene Wallace" class="mr-4 rounded-circle">
-            <div class="media-body">
-                <a href="#" class="d-block text-dark fs-15 font-weight-500 lh-15">Irene Wallace</a>
-                <span class="fs-13 lh-2">Sales Excutive</span>
-            </div>
-        </div>
-        <div class="ml-auto">
-            <button type="button" class="btn btn-primary fs-18 p-2 lh-1 mr-1 mb-1 shadow-none" data-toggle="modal"
-                data-target="#modal-messenger"><i class="fal fa-comment"></i></button>
-            <a href="tel:(+84)2388-969-888" class="btn btn-primary fs-18 p-2 lh-1 mb-1 shadow-none" target="_blank"><i
-                    class="fal fa-phone"></i></a>
-        </div>
-    </div>
-    <div class="modal fade" id="modal-messenger" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header border-0 pb-0">
-                    <h4 class="modal-title text-heading" id="exampleModalLabel">Contact Form</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body pb-6">
-                    <div class="form-group mb-2">
-                        <input type="text" class="form-control form-control-lg border-0"
-                            placeholder="First Name, Last Name">
-                    </div>
-                    <div class="form-group mb-2">
-                        <input type="email" class="form-control form-control-lg border-0" placeholder="Your Email">
-                    </div>
-                    <div class="form-group mb-2">
-                        <input type="tel" class="form-control form-control-lg border-0" placeholder="Your phone">
-                    </div>
-                    <div class="form-group mb-2">
-                        <textarea class="form-control border-0"
-                            rows="4">Hello, I'm interested in Villa Called Archangel</textarea>
-                    </div>
-                    <div class="form-group form-check mb-4">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck3">
-                        <label class="form-check-label fs-13" for="exampleCheck3">Egestas fringilla phasellus faucibus
-                            scelerisque eleifend donec.</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block rounded">Request Info</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>

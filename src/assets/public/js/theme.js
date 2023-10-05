@@ -661,9 +661,8 @@
 				addRemoveLinks: true,
 				init: function () {
 					var thisDropzone = this;
-
 					if ($image_url !== undefined) {
-						var mockFile = {name: 'Name Image', size: 12345, type: 'image/jpeg'};
+						var mockFile = {name: 'Name Image', size: 12345};
 						thisDropzone.emit("addedfile", mockFile);
 						thisDropzone.emit("success", mockFile);
 						thisDropzone.emit("thumbnail", mockFile, $image_url);

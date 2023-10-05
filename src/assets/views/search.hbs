@@ -52,11 +52,11 @@
                     </li>
                     <li class="col-sm-6">
                         <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block" data-toggle="tooltip"
-                            title="{{this.detail.garages}}{{..._.core.garages}}">
+                            title="{{this.detail.garages}} {{..._.core.garage}}">
                             <svg class="icon icon-Garage fs-24 text-primary mr-2">
                                 <use xlink:href="#icon-Garage"></use>
                             </svg>
-                            {{this.detail.garages}}{{..._.core.garages}}
+                            {{this.detail.garages}} {{..._.core.garage}}
                         </p>
                     </li>
                 </ul>
@@ -65,14 +65,9 @@
                         {{this.description.before_price_label}}&nbsp;{{this.description.price_in}}&nbsp;{{this.description.after_price_label}}
                     </p>
                     <ul class="list-inline mb-0 d-flex justify-content-end align-items-end h-100 hover-image">
-                        <li class="list-inline-item mr-5">
-                            <a href="#" class="text-body fs-20 hover-primary" data-toggle="tooltip" title="Wishlist">
-                                <i class="far fa-heart"></i>
-                            </a>
-                        </li>
                         <li class="list-inline-item">
-                            <a href="#" class="text-body fs-20 hover-primary" data-toggle="tooltip" title="Compare">
-                                <i class="fas fa-exchange-alt"></i>
+                            <a href="/product/{{this.id}}" class="text-body fs-20 hover-primary" data-toggle="tooltip" title="Compare">
+                                <i class="fa fa-info-circle"></i>
                             </a>
                         </li>
                     </ul>

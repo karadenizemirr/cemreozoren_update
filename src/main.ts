@@ -67,8 +67,7 @@ async function bootstrap() {
   });
 
 
-  app.register(fastyfyMultipart);
-
+  
   await app.register(compression, { encodings: ['gzip', 'deflate'] });
   await app.register(secureSession, {
     secret: process.env['SECRET_KEY'] || 'averylogphrasebiggerthanthirtytwochars',
@@ -81,7 +80,10 @@ async function bootstrap() {
       maxAge: 60 * 60
     }
   })
-  app.useGlobalFilters(new ErrorService())
+  
+  app.enableCors()
+  await app.register(fastyfyMultipart);
+  //app.useGlobalFilters(new ErrorService())
   await app.register(fastifyCsrf)
   await app.listen(process.env.PORT ?? 3000, process.env.HOST || '0.0.0.0');
 

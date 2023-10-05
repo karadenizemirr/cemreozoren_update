@@ -10,9 +10,9 @@
                 {{/with}}
                 <div class="card-img-overlay p-2">
                     {{#eq this.description.propert_status 'sale'}}
-                    <span class="badge badge-indigo position-absolute pos-fixed-top">Satılık</span>
+                    <span class="badge badge-indigo position-absolute pos-fixed-top">{{..._.core.sale}}</span>
                     {{else}}
-                    <span class="badge badge-primary position-absolute pos-fixed-top">Kiralık</span>
+                    <span class="badge badge-primary position-absolute pos-fixed-top">{{..._.core.rent}}</span>
                     {{/eq}}
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <ul class="row list-inline mb-0 py-3">
                     <li class="col-sm-6">
                         <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block" data-toggle="tooltip"
-                            title="3 Bedrooms">
+                            title="{{this.detail.bedrooms}} {{..._.core.bedrooms}}">
                             <svg class="icon icon-bedroom fs-24 text-primary mr-2">
                                 <use xlink:href="#icon-bedroom"></use>
                             </svg>
@@ -33,7 +33,7 @@
                     </li>
                     <li class="col-sm-6">
                         <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block" data-toggle="tooltip"
-                            title="3 Bathrooms">
+                            title="{{this.detail.bathrooms}} {{..._.core.bathrooms}}">
                             <svg class="icon icon-shower fs-24 text-primary mr-2">
                                 <use xlink:href="#icon-shower"></use>
                             </svg>
@@ -42,7 +42,7 @@
                     </li>
                     <li class="col-sm-6">
                         <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block" data-toggle="tooltip"
-                            title="Size">
+                            title="{{this.detail.size_in_ft}} &#13217;">
                             <svg class="icon icon-square fs-24 text-primary mr-2">
                                 <use xlink:href="#icon-square"></use>
                             </svg>
@@ -51,11 +51,11 @@
                     </li>
                     <li class="col-sm-6">
                         <p class="mb-0 text-gray font-weight-500 fs-13 mb-3 d-inline-block" data-toggle="tooltip"
-                            title="1 Garage">
+                            title="{{this.detail.garages}} {{..._.core.garage}}">
                             <svg class="icon icon-Garage fs-24 text-primary mr-2">
                                 <use xlink:href="#icon-Garage"></use>
                             </svg>
-                            {{this.detail.garages}} Garage
+                            {{this.detail.garages}} {{..._.core.garage}}
                         </p>
                     </li>
                 </ul>
@@ -64,14 +64,9 @@
                         {{this.description.before_price_label}}&nbsp;{{this.description.price_in}}&nbsp;{{this.description.after_price_label}}
                     </p>
                     <ul class="list-inline mb-0 d-flex justify-content-end align-items-end h-100 hover-image">
-                        <li class="list-inline-item mr-5">
-                            <a href="#" class="text-body fs-20 hover-primary" data-toggle="tooltip" title="Wishlist">
-                                <i class="far fa-heart"></i>
-                            </a>
-                        </li>
                         <li class="list-inline-item">
-                            <a href="#" class="text-body fs-20 hover-primary" data-toggle="tooltip" title="Compare">
-                                <i class="fas fa-exchange-alt"></i>
+                            <a href="/product/{{this.id}}" class="text-body fs-20 hover-primary" data-toggle="tooltip" title="Detay">
+                                <i class="fa fa-info-circle"></i>
                             </a>
                         </li>
                     </ul>

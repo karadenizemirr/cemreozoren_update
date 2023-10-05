@@ -81,6 +81,7 @@ export class ProductService {
             )
             return product
         } catch (err) {
+            console.log(err)
             throw new HttpException(err, HttpStatus.BAD_REQUEST);
         }
     }
