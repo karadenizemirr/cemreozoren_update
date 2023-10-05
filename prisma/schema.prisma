@@ -119,6 +119,7 @@ model Product {
   location    Location?
   detail      Detail?
   createdAt   DateTime     @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
   category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   categoryId Int?
 }
