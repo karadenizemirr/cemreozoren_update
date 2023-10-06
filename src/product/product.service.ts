@@ -299,22 +299,12 @@ export class ProductService {
             }
 
             if (keyword_key !== '') {
-                where.OR = [
-                    {
-                        title: {
-                            contains: keyword_key,
-                            mode: 'insensitive'
-                        },
-                        description: {
-                            contains: keyword_key,
-                            mode: 'insensitive'
-                        },
-                        details: {
-                            contains: keyword_key,
-                            mode: 'insensitive'
-                        }
+                where.description = {
+                    title: {
+                        contains: keyword_key,
+                        mode: 'insensitive'
                     }
-                ]
+                }
             }
 
             const result = await this.prisma.product.findMany({
