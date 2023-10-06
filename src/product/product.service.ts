@@ -280,7 +280,7 @@ export class ProductService {
         try {
             const where: any = {};
 
-            if (category_key) {
+            if (category_key !== '') {
                 where.category = {
                     name: {
                         contains: category_key,
@@ -289,22 +289,32 @@ export class ProductService {
                 };
             }
 
-            if (location_key) {
+            if (location_key !== '') {
                 where.location = {
-                    address: {
+                    city: {
                         contains: location_key,
                         mode: 'insensitive'
                     }
                 };
             }
 
-            if (keyword_key) {
-                where.description = {
-                    title: {
-                        contains: keyword_key,
-                        mode: 'insensitive'
+            if (keyword_key !== '') {
+                where.OR = [
+                    {
+                        title: {
+                            contains: keyword_key,
+                            mode: 'insensitive'
+                        },
+                        description: {
+                            contains: keyword_key,
+                            mode: 'insensitive'
+                        },
+                        details: {
+                            contains: keyword_key,
+                            mode: 'insensitive'
+                        }
                     }
-                };
+                ]
             }
 
             const result = await this.prisma.product.findMany({
