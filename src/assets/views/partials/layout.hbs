@@ -268,10 +268,8 @@
                   <select
                     class="form-control selectpicker bg-transparent border-bottom rounded-0 border-input-opacity-02"
                     name="location" title="{{_.core.select}}" data-style="p-0 h-24 lh-17 text-white">
-                    {{#each category_with_product}}
-                    {{#each this.products}}
-                      <option value="{{location.city}}">{{location.city}}</option>
-                    {{/each}}
+                    {{#each edit_location}}
+                      <option value="{{this}}">{{this}}</option>
                     {{/each}}
                   </select>
                 </div>
@@ -327,10 +325,8 @@
                 <div class="col-sm-6 pt-4 px-2">
                   <select class="form-control border-0 shadow-none form-control-lg selectpicker bg-white" name="location"
                     title="{{_.core.location}}" data-style="btn-lg py-2 h-52 bg-white">
-                    {{#each category_with_product}}
-                    {{#each this.products}}
-                      <option value="{{location.city}}">{{location.city}}</option>
-                    {{/each}}
+                    {{#each edit_location}}
+                      <option value="{{this}}">{{this}}</option>
                     {{/each}}
                   </select>
                 </div>

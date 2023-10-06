@@ -21,8 +21,17 @@ export class NavbarInterceptors implements NestInterceptor{
             const category_with_product = await this.categoryService.category_with_product();
             const products = await this.productService.get_all_product();
             const languages = await this.languageService.get_all_language();
-            
+            const edit_location = []
 
+            for (const _ of category_with_product){
+                for (const i of _.products){
+                    if (!edit_location.includes(i.location.city)){
+                        edit_location.push(i.location.city)
+                    }
+                }
+            }
+
+            response.locals.edit_location = edit_location
             response.locals.language = languages
             response.locals.products = products
             response.locals.category_with_product = category_with_product
