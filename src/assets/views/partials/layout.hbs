@@ -258,7 +258,9 @@
                     class="form-control selectpicker bg-transparent border-bottom rounded-0 border-input-opacity-02"
                     name="category" title="{{_.core.select}}" data-style="p-0 h-24 lh-17 text-white">
                     {{#each category_with_product}}
+                    {{#eq this.category.language.short ...lang}}
                       <option value="{{this.name}}">{{this.name}}</option>
+                      {{/eq}}
                     {{/each}}
                   </select>
                 </div>
